@@ -1,0 +1,30 @@
+{
+  "name": "taskflow-api-validation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Postman and Newman API validation suite",
+  "scripts": {
+    "postinstall": "node scripts/patch-newman-faker.cjs && node scripts/check-newman-faker.cjs",
+    "api:start": "python -m uvicorn app.main:app --host 127.0.0.1 --port 8000",
+    "contract:check": "python scripts/openapi_contract.py",
+    "performance:smoke": "python scripts/performance_smoke.py",
+    "postman:test": "newman run postman/TaskFlow_API.postman_collection.json -e postman/local.postman_environment.json --reporters cli,junit --reporter-junit-export reports/newman-junit.xml",
+    "postman:html": "newman run postman/TaskFlow_API.postman_collection.json -e postman/local.postman_environment.json --reporters cli,htmlextra --reporter-htmlextra-export reports/newman-report.html"
+  },
+  "devDependencies": {
+    "newman": "^6.2.1",
+    "newman-reporter-htmlextra": "^1.23.1"
+  },
+  "overrides": {
+    "@faker-js/faker": "^10.4.1",
+    "csv-parse": "^7.0.2",
+    "flatted": "^3.4.2",
+    "handlebars": "^4.7.10",
+    "jose": "^4.15.5",
+    "lodash": "^4.17.24",
+    "node-forge": "^1.4.1",
+    "qs": "^6.16.1",
+    "underscore": "^1.13.8",
+    "uuid": "^11.1.1"
+  }
+}
