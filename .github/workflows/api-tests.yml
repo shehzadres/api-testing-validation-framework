@@ -21,7 +21,7 @@ jobs:
       - name: Run Pytest suite
         run: |
           mkdir -p reports
-          pytest -v --junitxml=reports/pytest-junit.xml --html=reports/pytest-report.html --self-contained-html --cov=app --cov-report=term-missing
+          python -m pytest -v --junitxml=reports/pytest-junit.xml --html=reports/pytest-report.html --self-contained-html --cov=app --cov-report=term-missing
       - name: Upload Python reports
         if: always()
         uses: actions/upload-artifact@v4
