@@ -1,5 +1,7 @@
 # Project 02 · API Testing & Validation Framework
 
+> **Recruiter showcase:** [Open the visual QA case study](https://shehzadres.github.io/api-testing-validation-framework/) · [View CI execution](https://github.com/shehzadres/api-testing-validation-framework/actions)
+
 A portfolio-grade API quality engineering project built around **TaskFlow**, a deliberately scoped task-management REST API. It demonstrates how an SQA engineer designs, automates, validates, reports, and continuously checks API behavior.
 
 <p align="center">
