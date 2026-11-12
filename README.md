@@ -7,6 +7,7 @@ A portfolio-grade API quality engineering project built around **TaskFlow**, a d
 </p>
 
 <p align="center">
+  <a href="https://github.com/shehzadres/api-testing-validation-framework/actions/workflows/api-tests.yml"><img src="https://github.com/shehzadres/api-testing-validation-framework/actions/workflows/api-tests.yml/badge.svg" alt="API Validation CI"></a>
   <img src="https://img.shields.io/badge/Pytest-34%20passing-16a34a?logo=pytest&logoColor=white" alt="34 Pytest tests passing">
   <img src="https://img.shields.io/badge/Coverage-97%25-2563eb" alt="97 percent coverage">
   <img src="https://img.shields.io/badge/Newman-13%20requests-0d9488" alt="13 Newman requests">
@@ -71,7 +72,7 @@ See [architecture and request lifecycle](docs/architecture.md).
 ### Postman/Newman execution report
 ![Newman HTML report](docs/screenshots/newman-report.png)
 
-The screenshots are visual evidence samples. The generated HTML/JUnit reports are recreated locally and are intentionally excluded from Git to keep the repository lean. CI uploads fresh reports as workflow artifacts.
+The screenshots are visual examples captured during an earlier local run; the current verified totals are shown in the dashboard above and the latest QA report. Generated HTML/JUnit reports are recreated during execution and intentionally excluded from Git to keep the repository lean. CI uploads fresh reports as workflow artifacts.
 
 ## Run locally
 
@@ -153,7 +154,7 @@ The GitHub Actions workflow in `.github/workflows/api-tests.yml` is configured t
 6. Execute the Postman collection with Newman.
 7. Upload reports as workflow artifacts, including on failure.
 
-**CI status:** workflow configured; remote execution must be confirmed from the repository's Actions tab after publication.
+**CI status:** <a href="https://github.com/shehzadres/api-testing-validation-framework/actions/runs/43156640804">Latest GitHub Actions run passed</a>. Both Python and Newman jobs completed successfully on 12 November 2026.
 
 ## Security, limitations, and scope
 
