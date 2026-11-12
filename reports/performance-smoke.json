@@ -1,10 +1,10 @@
 {
   "endpoint": "GET /health",
   "samples": 40,
-  "min_ms": 3.8,
-  "median_ms": 5.23,
-  "p95_ms": 26.1,
-  "max_ms": 27.23,
+  "min_ms": 3.68,
+  "median_ms": 5.41,
+  "p95_ms": 29.05,
+  "max_ms": 32.12,
   "threshold_p95_ms": 500,
   "status": "passed",
   "note": "Local smoke threshold, not a load or capacity benchmark."
