@@ -1,7 +1,7 @@
 # API Test Plan
 
 ## Objective
-Verify TaskFlow REST API behavior, contract stability, authorization boundaries, input validation, SQL persistence, and repeatable automated execution.
+Verify TaskFlow REST API behavior, contract stability, authentication and authorization boundaries, input validation, SQL persistence, and repeatable automated execution.
 
 ## Environment
 - Python 3.10+
@@ -18,10 +18,12 @@ Verify TaskFlow REST API behavior, contract stability, authorization boundaries,
 | AUTH-02 | Invalid password | 401 |
 | AUTH-03 | Unknown username | 401 |
 | AUTH-04 | Missing bearer token | 401 |
-| AUTH-05 | Malformed/expired/tampered token | 401 |
-| AUTH-06 | User reads another user's task | 403 |
-| AUTH-07 | User updates/deletes another user's task | 403 |
-| AUTH-08 | Admin reads another user's task | 200 |
+| AUTH-05 | Malformed token | 401 |
+| AUTH-06 | Expired token | 401 |
+| AUTH-07 | Tampered token signature | 401 |
+| AUTH-08 | User reads another user's task | 403 |
+| AUTH-09 | User updates/deletes another user's task | 403 |
+| AUTH-10 | Admin reads another user's task | 200 |
 | CRUD-01 | Create task | 201 + schema |
 | CRUD-02 | List own tasks | 200 + owner-scoped data |
 | CRUD-03 | Read existing task | 200 |
@@ -45,8 +47,9 @@ Verify TaskFlow REST API behavior, contract stability, authorization boundaries,
 1. Run the Pytest suite against an isolated SQLite database.
 2. Run database integrity and foreign-key checks.
 3. Start the API and execute the Postman collection with Newman.
-4. Review HTML/JUnit reports.
-5. CI executes Python tests first, then starts the service and runs Newman.
+4. Verify OpenAPI contract drift and performance smoke threshold.
+5. Review HTML/JUnit reports.
+6. CI executes Python tests first, then starts the service and runs Newman.
 
 ## Evidence policy
-Only record pass/fail counts after an actual execution. Do not treat a collection definition or a configured workflow as proof that tests passed in CI.
+Only record pass/fail counts after an actual execution. Distinguish local results from remote CI results. A configured workflow or a collection definition is not proof that a remote pipeline passed.

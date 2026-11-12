@@ -1,6 +1,8 @@
 import sqlite3
+import time
 from pathlib import Path
 import pytest
+from app.main import encode_token
 
 DB_PATH = Path(__file__).resolve().parent.parent / "data" / "test_api.db"
 TASK_KEYS = {"id", "title", "description", "status", "owner_id", "created_at", "updated_at"}
@@ -34,6 +36,20 @@ def test_missing_token_rejected(client):
 @pytest.mark.auth
 def test_malformed_token_rejected(client):
     assert client.get("/tasks", headers={"Authorization": "Bearer invalid.token.value"}).status_code == 401
+
+@pytest.mark.auth
+def test_expired_token_rejected(client):
+    token = encode_token({"sub": 2, "username": "qa_user", "role": "user", "exp": int(time.time()) - 60})
+    response = client.get("/tasks", headers={"Authorization": f"Bearer {token}"})
+    assert response.status_code == 401
+
+@pytest.mark.auth
+def test_tampered_token_rejected(client):
+    token = client.post("/auth/login", json={"username": "qa_user", "password": "User123!"}).json()["access_token"]
+    header, payload, signature = token.split(".")
+    replacement = ("A" if signature[0] != "A" else "B") + signature[1:]
+    response = client.get("/tasks", headers={"Authorization": f"Bearer {header}.{payload}.{replacement}"})
+    assert response.status_code == 401
 
 @pytest.mark.auth
 def test_user_cannot_read_another_users_task(client, auth_headers, second_user_token):
